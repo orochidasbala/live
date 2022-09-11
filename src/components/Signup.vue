@@ -24,7 +24,7 @@
             required
         />
         <button>Create account</button>
-        <p v-if="error">Error : {{ error }}</p>
+        <p v-if="error" class="error">Error : {{ error }}</p>
     </form>
 </template>
 
@@ -45,7 +45,11 @@ export default {
                 email.value,
                 password.value
             );
-            console.log(res.user);
+            if (res) {
+                console.log(res.user);
+            } else {
+                console.log(error.value);
+            }
         };
 
         return { username, email, password, signupNow, error };
