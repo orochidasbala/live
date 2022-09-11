@@ -30,36 +30,22 @@
 
 <script>
 import { ref } from "@vue/reactivity";
-import {
-    createUserWithEmailAndPassword,
-    debugErrorMap,
-    updateProfile,
-} from "@firebase/auth";
-import { auth } from "@/firebase/config";
+import useSignup from "../composable/useSignup";
+
 export default {
     setup() {
         let username = ref("");
         let email = ref("");
         let password = ref("");
-        let error = ref(null);
 
+        let { error, cerateAccount } = useSignup();
         let signupNow = async () => {
-            try {
-                let res = await createUserWithEmailAndPassword(
-                    auth,
-                    email.value,
-                    password.value
-                );
-                if (!res) {
-                    throw new Error(
-                        "can't create new account. something went wrong!"
-                    );
-                }
-                await updateProfile(res.user, { displayName: username.value });
-                console.log(res.user);
-            } catch (err) {
-                error.value = err.message;
-            }
+            let res = await cerateAccount(
+                username.value,
+                email.value,
+                password.value
+            );
+            console.log(res.user);
         };
 
         return { username, email, password, signupNow, error };
