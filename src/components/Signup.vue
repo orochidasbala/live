@@ -33,7 +33,7 @@ import { ref } from "@vue/reactivity";
 import useSignup from "../composable/useSignup";
 
 export default {
-    setup() {
+    setup(props, context) {
         let username = ref("");
         let email = ref("");
         let password = ref("");
@@ -47,6 +47,7 @@ export default {
             );
             if (res) {
                 console.log(res.user);
+                context.emit("goChatroom");
             } else {
                 console.log(error.value);
             }

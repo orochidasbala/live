@@ -7,7 +7,7 @@ let loginAcc = async (email, password) => {
     try {
         let res = await signInWithEmailAndPassword(auth, email, password)
         if (!res) {
-            throw new Error("can not login, somtthing went wrong")
+            throw new Error("can not login, something went wrong")
         }
         return res;
     } catch (err) {

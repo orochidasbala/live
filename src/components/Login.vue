@@ -12,7 +12,7 @@
 import { ref } from "@vue/reactivity";
 import useLogin from "../composable/useLogin";
 export default {
-    setup() {
+    setup(props, context) {
         let email = ref("");
         let password = ref("");
         let { error, loginAcc } = useLogin();
@@ -20,6 +20,7 @@ export default {
             let res = await loginAcc(email.value, password.value);
             if (res) {
                 console.log(res.user);
+                context.emit("goChatroom");
             } else {
                 console.log(error.value);
             }
