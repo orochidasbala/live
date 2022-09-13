@@ -28,7 +28,7 @@ export default {
         Signup,
     },
     setup() {
-        let showLoginForm = ref(true);
+        let showLoginForm = ref(false);
         let goChatroom = () => {
             router.push({ name: "Chatroom" });
         };

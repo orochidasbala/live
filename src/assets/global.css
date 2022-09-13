@@ -7,21 +7,22 @@
 body {
     display: flex;
     justify-content: center;
-    align-items: center;
     min-height: 100vh;
-    background: url("../assets/bg1.jpg");
+    /* background: url("../assets/bg1.jpg"); */
 }
 
 .container {
-    margin: 10px auto;
-    /* box-shadow: 1px 1px 10px rgb(167, 167, 167); */
+    margin: 50px auto;
+    box-shadow: 1px 1px 10px rgb(167, 167, 167);
     padding: 5px;
     border-radius: 20px;
     width: 700px;
+    background-color: #fff;
 }
 
 .welcome {
     text-align: center;
+    margin-bottom: 30px;
 }
 
 /* button */
@@ -29,17 +30,12 @@ button {
     appearance: none;
     padding: 8px 20px;
     border-radius: 0;
-    overflow: hidden;
     background-color: transparent;
     border: 2px solid #fff;
-    box-sizing: border-box;
-    color: #ddd;
+    color: #999;
     cursor: pointer;
-    display: inline-block;
     font-size: 16px;
     font-weight: 600;
-    line-height: normal;
-    margin-top: 30px;
     outline: none;
     text-align: center;
     text-decoration: none;
@@ -71,7 +67,7 @@ input {
     border: none;
     border-bottom: 2px solid #ddd;
     padding: 8px;
-    margin: 15px;
+    margin-bottom: 30px;
     outline: none;
     color: #fff;
     font-size: medium;

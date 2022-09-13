@@ -58,4 +58,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+h1 {
+    margin: 20px;
+}
+</style>

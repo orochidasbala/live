@@ -19,7 +19,6 @@ export default {
         let loginNow = async () => {
             let res = await loginAcc(email.value, password.value);
             if (res) {
-                console.log(res.user);
                 context.emit("goChatroom");
             } else {
                 console.log(error.value);
