@@ -3,7 +3,7 @@
         <textarea
             v-model="message"
             placeholder="type text here"
-            @keypress.ctrl.enter="handelSubmit"
+            @keypress.enter="handelSubmit"
         ></textarea>
     </div>
 </template>
@@ -12,17 +12,22 @@
 import { ref } from "@vue/reactivity";
 import getUser from "@/composable/getUser";
 import { timeStamp } from "@/firebase/config";
+import useCollection from "../composable/useCollection";
 export default {
     setup() {
         let message = ref(null);
         let { user } = getUser();
+        let { error, adDoc } = useCollection("messages");
 
-        let handelSubmit = () => {
+        let handelSubmit = async () => {
             let chatInfo = {
                 message: message.value,
                 username: user.value.displayName,
                 createdAt: timeStamp(),
             };
+
+            await adDoc(chatInfo);
+
             console.log(chatInfo);
             message.value = null;
         };
