@@ -15,8 +15,6 @@ let useCollection = (collection_name) => {
             error.value = "could not sent the message"
         }
     }
-
-
     return { error, adDoc }
 }
 

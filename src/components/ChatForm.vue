@@ -43,6 +43,7 @@ export default {
     justify-content: center;
     align-items: center;
     padding: 20px;
+    border-top: 1px solid #eee;
 }
 textarea {
     margin: 2px auto;
