@@ -1,21 +1,19 @@
-import { db } from "@/firebase/config"
-import { addDoc, collection } from "firebase/firestore/lite"
-import { ref } from "vue"
+import { db } from '@/firebase/config';
+import { addDoc, collection } from 'firebase/firestore';
+import { ref } from 'vue';
 
-
-let useCollection = (collection_name) => {
-
-    let error = ref(null)
+const useCollection = (collectionName) => {
+    let error = ref(null);
     let adDoc = async (chatInfo) => {
-        let dbRef = collection(db, collection_name)
+        let dbRef = collection(db, collectionName);
         try {
-            await addDoc(dbRef, chatInfo)
+            return addDoc(dbRef, chatInfo);
         } catch (err) {
-            console.log(err.message)
-            error.value = "could not sent the message"
+            console.log(err.message);
+            error.value = 'could not sent the message';
         }
-    }
-    return { error, adDoc }
-}
+    };
+    return { error, adDoc };
+};
 
 export default useCollection;

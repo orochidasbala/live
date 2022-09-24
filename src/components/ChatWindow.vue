@@ -1,30 +1,42 @@
 <template>
     <div class="chatwindow">
         <div class="messages">
-            <div class="single">
-                <span class="created_at">time</span>
-                <span class="name">username</span>
-                <span class="text">message</span>
+            <div class="single" v-for="message in messages" :key="message.id">
+                <span class="created_at">{{ message.createdAt }}</span>
+                <span class="name">{{ message.username }}</span>
+                <span class="text">{{ message.message }}</span>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { db } from "@/firebase/config";
-import { collection, orderBy, query } from "@firebase/firestore/lite";
-import { onSnapshot } from "@firebase/firestore";
+import { db } from '@/firebase/config';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { ref } from 'vue';
 
 export default {
     setup() {
-        let collectionRef = collection(db, "messages");
-        let q = query(collectionRef, orderBy("created_at", "desc"));
+        const messages = ref([]);
+        const messagesCollectionRef = collection(db, 'messages');
+        const messagesCollectionQuery = query(
+            messagesCollectionRef,
+            orderBy('createdAt', 'asc')
+        );
 
-        onSnapshot(q, (quarySnap) => {
-            console.log(quarySnap);
+        onSnapshot(messagesCollectionQuery, (querySnapshot) => {
+            const messageDoc = [];
+            querySnapshot.docs.forEach((doc) => {
+                const docs = { ...doc.data(), id: doc.id };
+                // id: doc.id,
+                //     username: doc.data().username,
+                //     message: doc.data().message,
+                //     createdAt: doc.data().createdAt,
+                messageDoc.push(docs);
+            });
+            messages.value = messageDoc;
         });
-
-        return { collectionRef };
+        return { messages };
     },
 };
 </script>

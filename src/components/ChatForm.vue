@@ -9,15 +9,15 @@
 </template>
 
 <script>
-import { ref } from "@vue/reactivity";
-import getUser from "@/composable/getUser";
-import { timeStamp } from "@/firebase/config";
-import useCollection from "../composable/useCollection";
+import { ref } from '@vue/reactivity';
+import getUser from '@/composable/getUser';
+import { timeStamp } from '@/firebase/config';
+import useCollection from '../composable/useCollection';
 export default {
     setup() {
         let message = ref(null);
         let { user } = getUser();
-        let { error, adDoc } = useCollection("messages");
+        let { error, adDoc } = useCollection('messages');
 
         let handelSubmit = async () => {
             let chatInfo = {
