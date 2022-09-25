@@ -2,7 +2,7 @@
     <div class="chatwindow">
         <div class="messages">
             <div class="single" v-for="message in messages" :key="message.id">
-                <span class="created_at">{{ message.createdAt }}</span>
+                <span class="created_at">{{ message.createdAt.toDate() }}</span>
                 <span class="name">{{ message.username }}</span>
                 <span class="text">{{ message.message }}</span>
             </div>
@@ -28,11 +28,7 @@ export default {
             const messageDoc = [];
             querySnapshot.docs.forEach((doc) => {
                 const docs = { ...doc.data(), id: doc.id };
-                // id: doc.id,
-                //     username: doc.data().username,
-                //     message: doc.data().message,
-                //     createdAt: doc.data().createdAt,
-                messageDoc.push(docs);
+                doc.data().createdAt && messageDoc.push(docs);
             });
             messages.value = messageDoc;
         });
