@@ -16,6 +16,7 @@ import useCollection from '../composable/useCollection';
 export default {
     setup() {
         let message = ref(null);
+        let autoScroll = ref(null);
         let { user } = getUser();
         let { error, adDoc } = useCollection('messages');
 
@@ -25,10 +26,7 @@ export default {
                 username: user.value.displayName,
                 createdAt: timeStamp(),
             };
-
             await adDoc(chatInfo);
-
-            console.log(chatInfo);
             message.value = null;
         };
 

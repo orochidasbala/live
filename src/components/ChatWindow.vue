@@ -1,6 +1,6 @@
 <template>
     <div class="chatwindow">
-        <div class="messages">
+        <div class="messages" ref="autoScroll">
             <div
                 class="single"
                 v-for="message in formattedMessages"
@@ -17,12 +17,18 @@
 <script>
 import { db } from '@/firebase/config';
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { computed, ref } from 'vue';
+import { computed, onUpdated, ref } from 'vue';
 import { formatDistanceToNow } from 'date-fns';
 
 export default {
     setup() {
         const messages = ref([]);
+        let autoScroll = ref(null);
+
+        onUpdated(() => {
+            autoScroll.value.scrollTop = autoScroll.value.scrollHeight;
+        });
+
         const messagesCollectionRef = collection(db, 'messages');
         const messagesCollectionQuery = query(
             messagesCollectionRef,
@@ -45,7 +51,7 @@ export default {
             });
         });
 
-        return { formattedMessages };
+        return { formattedMessages, autoScroll };
     },
 };
 </script>
